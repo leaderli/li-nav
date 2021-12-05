@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import {ref,computed} from 'vue'
 import _ from 'lodash'
 
 interface Link{
@@ -11,7 +11,7 @@ interface Link{
 }
 const links = ref<Array<Link>>([])
 
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 100; i++) {
 
   links.value.push({
     index:i,
@@ -21,12 +21,28 @@ for (let i = 0; i < 1000; i++) {
     comment:'刘靖还是那么帅'+i
   })
 }
+const count = ref(0)
 
 const groupLink = _.groupBy(links.value, link => {
   const index = Math.floor(link.index / 4);
   console.log(link, index)
   return index
 });
+const  load_groupLink = ref<Array<Array<Link>>>([])
+
+for (let i = 0; i <5; i++) {
+  // console.log('-------------->',count.value)
+  count.value+=1
+  load_groupLink.value.push(groupLink[count.value])
+}
+
+
+const  load = ()=>{
+  console.log('-------------->',count.value)
+  count.value+=1
+  load_groupLink.value.push(groupLink[count.value])
+  return
+}
 
 const go = function (next:Link){
 
@@ -54,9 +70,12 @@ console.log(groupLink)
   <div>
 
     <el-scrollbar height="600px">
-      <div id="nav">
+      <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
 
-        <el-row  v-for="links of groupLink" :gutter="20">
+<!--      <div id="nav" v-infinite-scroll="load"  infinite-scroll-immediate="true" style="overflow: auto">-->
+
+        <li v-for="links of load_groupLink" :key="links" >
+        <el-row   :gutter="20">
           <el-col v-for=" link of links " :span="6">
             <el-tooltip placement="right-start">
               <template #content> {{link.url}}</template>
@@ -66,17 +85,14 @@ console.log(groupLink)
               <div class="card-header">
                 <el-row>
                   <el-col :span="4">
-
                     <img src="@/assets/logo.png" alt="" class="icon"/>
                   </el-col>
-                  <el-col :span="20" offset="" class="title">
-
+                  <el-col :span="20" class="title">
                     <span>{{link.title}}</span>
-
                   </el-col>
                 </el-row>
-                <el-row gutter="10">
-                  <el-col  span="4" v-for="tag of link.tag">
+                <el-row :gutter="10">
+                  <el-col  :span="4" v-for="tag of link.tag">
 
                     <el-tag  size="mini">
                     {{ tag }}
@@ -104,17 +120,35 @@ console.log(groupLink)
         <!--        <li v-for="link of links" :key="link" class="icon-item">-->
         <!--          -->
 
-        <!--        </li>-->
+                </li>
 
 
-        <!--      </ul>-->
-      </div>
+              </ul>
+<!--      </div>-->
     </el-scrollbar>
   </div>
 </template>
 
 <style scoped lang="scss">
+.infinite-list {
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 
+  .infinite-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background: var(--el-color-primary-light-9);
+    margin: 10px;
+    color: var(--el-color-primary);
+    & + .list-item {
+      margin-top: 10px;
+    }
+  }
+}
 #nav {
   padding: 0 20px;
   width: 80%;
