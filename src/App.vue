@@ -27,7 +27,7 @@ const input = ref<string>();
 
             <template #prefix>
 
-                <img src="favicon.ico" alt="" class="icon" @click="changeSearchEngine"/>
+                <img src="@/assets/logo.png" alt="" class="icon" @click="changeSearchEngine"/>
 
             </template>
           </el-input>

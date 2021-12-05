@@ -11,7 +11,7 @@ interface Link{
 }
 const links = ref<Array<Link>>([])
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 1000; i++) {
 
   links.value.push({
     index:i,
@@ -22,13 +22,13 @@ for (let i = 0; i < 100; i++) {
   })
 }
 
-const groupLink: Array<Array<Link>> = _.groupBy(links.value, link => {
+const groupLink = _.groupBy(links.value, link => {
   const index = Math.floor(link.index / 4);
   console.log(link, index)
   return index
 });
 
-const go = function (next){
+const go = function (next:Link){
 
   console.log(next)
   window.open(next.url, '_blank');
@@ -67,7 +67,7 @@ console.log(groupLink)
                 <el-row>
                   <el-col :span="4">
 
-                    <img src="favicon.ico" alt="" class="icon"/>
+                    <img src="@/assets/logo.png" alt="" class="icon"/>
                   </el-col>
                   <el-col :span="20" offset="" class="title">
 
