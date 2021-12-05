@@ -14,6 +14,8 @@ const input = ref<string>();
   <el-container>
     <el-header>
 
+
+
       <el-row class="search" justify="center">
 <!--        <el-col :span="1" >-->
 
@@ -21,7 +23,7 @@ const input = ref<string>();
 <!--          <span>123</span>-->
 
 <!--        </el-col>-->
-        <el-col :span="15" >
+        <el-col :span="19" >
 
           <el-input v-model="input" placeholder="Please input" >
 
