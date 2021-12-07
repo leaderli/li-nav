@@ -1,7 +1,7 @@
-export interface Link {
+export interface BookMark {
     index: number,
     title: string,
     url: string,
-    tag: Array<string>,
+    tags: Array<string>,
     comment: string
 }

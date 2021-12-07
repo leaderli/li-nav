@@ -1,16 +1,16 @@
 <template>
   <el-col :span="6">
     <el-tooltip placement="top">
-      <template #content> {{ link.url }}</template>
+      <template #content> {{ props.bookmark.url }}</template>
 
-      <el-card class="box-card nav-card" shadow="hover" @click="go(link)">
+      <el-card class="box-card nav-card" shadow="hover" @click="open(this.props.bookmark)">
         <template #header>
           <el-row>
             <el-col :span="3">
               <img src="@/assets/logo.png" alt="" class="icon"/>
             </el-col>
             <el-col :span="21" class="title">
-              <span>{{ link.title }}</span>
+              <span>{{ props.bookmark.title }}</span>
             </el-col>
           </el-row>
 
@@ -24,12 +24,12 @@
             <el-col :span="24" class="comment">
 
                     <span>
-                    {{ link.comment }}
+                    {{ props.bookmark.comment }}
                     </span>
             </el-col>
           </el-row>
           <el-row :gutter="10">
-            <el-col :span="4" v-for="tag of link.tag">
+            <el-col :span="4" v-for="tag of this.props.bookmark.tags">
               <el-tag size="mini">
                 {{ tag }}
               </el-tag>
@@ -43,20 +43,19 @@
 </template>
 
 <script lang="ts" setup>
-import {Link} from "@/type/link";
+import {BookMark} from "@/type/bookMark";
 import {PropType} from 'vue'
 
 
-defineProps({
-  link: {
-    type: Object as PropType<Link>
+const props = defineProps({
+  bookmark: {
+    type: Object as PropType<BookMark>
   }
 })
 
-const go = function (next: Link) {
-
-  console.log(next)
-  window.open(next.url, '_blank');
+const open = function (bookMark: BookMark) {
+  console.log(bookMark)
+  window.open(bookMark.url, '_blank');
 }
 
 </script>
