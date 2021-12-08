@@ -43,17 +43,17 @@
 </template>
 
 <script lang="ts" setup>
-import {BookMark} from "@/type/bookMark";
+import {Bookmark} from "@/type/Bookmark";
 import {PropType} from 'vue'
 
 
 const props = defineProps({
   bookmark: {
-    type: Object as PropType<BookMark>
+    type: Object as PropType<Bookmark>
   }
 })
 
-const open = function (bookMark: BookMark) {
+const open = function (bookMark: Bookmark) {
   console.log(bookMark)
   window.open(bookMark.url, '_blank');
 }

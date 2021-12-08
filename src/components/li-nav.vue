@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import _ from 'lodash'
-import {BookMark} from "@/type/bookMark";
+import {Bookmark} from "@/type/Bookmark";
+
+import {bookmarks} from '@/api/bookmarks';
 
 import LiNavCard from '@/components/li-nav-card.vue'
 
 const cardColNumber= 4;
-const groupByBookMarks = function (): Array<Array<BookMark>> {
-  const bookMarks: Array<BookMark> = ([])
+
+const b = bookmarks();
+console.log('b',b)
+
+const groupByBookMarks = function (): Array<Array<Bookmark>> {
+  const bookMarks: Array<Bookmark> = ([])
 
   for (let i = 0; i < 10; i++) {
 

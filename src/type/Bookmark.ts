@@ -1,4 +1,4 @@
-export interface BookMark {
+export interface Bookmark {
     index: number,
     title: string,
     url: string,
