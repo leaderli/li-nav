@@ -3,3 +3,8 @@ node_modules
 dist
 dist-ssr
 *.local
+
+src/**/*.js
+src/**/*.js.map
+mock/**/*.js
+mock/**/*.js.map
