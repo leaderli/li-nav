@@ -1,10 +1,10 @@
 import axiosNew, {Method} from "axios";
 
-const axios = function <Req extends object, Resp>(path: string, method: Method = 'GET', data: Req = {} as Req) {
+const axios = function <Req , Resp>(path: string, method: Method = 'GET', data: Req = {} as Req) {
 
     return new Promise<Resp>((resolve, reject) => {
 
-        let datas: object = {params: {...data}}
+        let datas: any= {params: {...data}}
         if ('POST' === method) {
             datas = {...data}
         }

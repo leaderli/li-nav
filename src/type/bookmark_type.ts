@@ -1,4 +1,4 @@
-export interface Bookmark {
+export interface bookmark_type {
     index: number,
     title: string,
     url: string,

@@ -1,22 +1,21 @@
 <script setup lang="ts">
-import {ref} from 'vue'
 import _ from 'lodash'
-import {Bookmark} from "@/type/Bookmark";
+import {bookmark_type} from "@/type/bookmark_type";
 
-import {bookmarks} from '@/api/bookmarks';
+import {bookmarks_api} from '@/api/bookmarks_api';
 
 import LiNavCard from '@/components/li-nav-card.vue'
 
 const cardColNumber= 4;
 
 
-const b = bookmarks();
+const b = bookmarks_api();
 b.then(res=>{
   console.log(res)
 })
 
-const groupByBookMarks = function (): Array<Array<Bookmark>> {
-  const bookMarks: Array<Bookmark> = ([])
+const groupByBookMarks = function (): Array<Array<bookmark_type>> {
+  const bookMarks: Array<bookmark_type> = ([])
 
   for (let i = 0; i < 10; i++) {
 
@@ -38,8 +37,8 @@ const groupByBookMarks = function (): Array<Array<Bookmark>> {
 <template>
   <div id="nav">
 
-    <el-row :gutter="20" v-for="bookmarks of groupByBookMarks" :key="bookmarks">
-      <li-nav-card v-for=" bookmark of bookmarks " :bookmark="bookmark"></li-nav-card>
+    <el-row :gutter="20" v-for="bookmarks_mock of groupByBookMarks" :key="bookmarks_mock">
+      <li-nav-card v-for=" bookmark of bookmarks_mock " :bookmark="bookmark"></li-nav-card>
     </el-row>
 
   </div>
