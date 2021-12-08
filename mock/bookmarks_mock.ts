@@ -14,11 +14,11 @@ const randomTag = function<T> (num:number,arr:Array<T>){
 }
 const bookmarks_mock = mock({
     'data|10': [{
-        'index|+1': 1,
-        title: Random.title(3, 5),
+        'index|+1': 0,
+        title: '@cname',
         url: Random.url(),
-        'tag': ()=>randomTag<string>(3,['vue', 'java', 'movie']),
-        comment: Random.paragraph(5,30)
+        'tags': ()=>randomTag<string>(3,['vue', 'java', 'movie']),
+        comment: '@county(true)'
 
     }]
 })

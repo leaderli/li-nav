@@ -5,30 +5,16 @@ import {bookmark_type} from "@/type/bookmark_type";
 import {bookmarks_api} from '@/api/bookmarks_api';
 
 import LiNavCard from '@/components/li-nav-card.vue'
+import {ref} from "vue";
 
 const cardColNumber= 4;
 
-
-const b = bookmarks_api();
-b.then(res=>{
+const shard_bookmarks = ref<Array<Array<bookmark_type>>>();
+bookmarks_api().then(res=>{
   console.log(res)
+  shard_bookmarks.value = Object.values(_(res).groupBy(bookmark=>Math.floor(bookmark.index/cardColNumber)).value())
 })
 
-const groupByBookMarks = function (): Array<Array<bookmark_type>> {
-  const bookMarks: Array<bookmark_type> = ([])
-
-  for (let i = 0; i < 10; i++) {
-
-    bookMarks.push({
-      index: i,
-      title: 'element-plus' + i,
-      url: 'https://element-plus.gitee.io/',
-      tags: ['vue', 'element' + i],
-      comment: '刘靖还是那么帅' + i
-    })
-  }
-  return Object.values(_(bookMarks).groupBy(bookmark=>Math.floor(bookmark.index/cardColNumber)).value())
-}()
 
 
 
@@ -37,8 +23,8 @@ const groupByBookMarks = function (): Array<Array<bookmark_type>> {
 <template>
   <div id="nav">
 
-    <el-row :gutter="20" v-for="bookmarks_mock of groupByBookMarks" :key="bookmarks_mock">
-      <li-nav-card v-for=" bookmark of bookmarks_mock " :bookmark="bookmark"></li-nav-card>
+    <el-row :gutter="20" v-for="bookmarks of shard_bookmarks" :key="bookmarks">
+      <li-nav-card v-for=" bookmark of bookmarks " :bookmark="bookmark"></li-nav-card>
     </el-row>
 
   </div>

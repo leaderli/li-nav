@@ -1,7 +1,7 @@
 <template>
   <el-col :span="6">
     <el-tooltip placement="top">
-      <template #content> {{ props.bookmark.url }}</template>
+      <template #content> {{ this.props.bookmark.url }}</template>
 
       <el-card class="box-card nav-card" shadow="hover" @click="open(this.props.bookmark)">
         <template #header>
@@ -29,7 +29,7 @@
             </el-col>
           </el-row>
           <el-row :gutter="10">
-            <el-col :span="4" v-for="tag of this.props.bookmark.tags">
+            <el-col :span="4" v-for="tag of props.bookmark.tags">
               <el-tag size="mini">
                 {{ tag }}
               </el-tag>
