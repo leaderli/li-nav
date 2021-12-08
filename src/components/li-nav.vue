@@ -9,8 +9,11 @@ import LiNavCard from '@/components/li-nav-card.vue'
 
 const cardColNumber= 4;
 
+
 const b = bookmarks();
-console.log('b',b)
+b.then(res=>{
+  console.log(res)
+})
 
 const groupByBookMarks = function (): Array<Array<Bookmark>> {
   const bookMarks: Array<Bookmark> = ([])

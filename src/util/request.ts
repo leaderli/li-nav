@@ -1,15 +1,15 @@
 import axiosNew, {Method} from "axios";
 
-const axios = function (path: string, method:Method= 'GET', data: object = {}) {
+const axios = function <Req extends object, Resp>(path: string, method: Method = 'GET', data: Req = {} as Req) {
 
-    return new Promise((resolve, reject) => {
+    return new Promise<Resp>((resolve, reject) => {
 
-        let datas:object = {params:{... data}}
-        if('POST' === method){
+        let datas: object = {params: {...data}}
+        if ('POST' === method) {
             datas = {...data}
         }
         axiosNew({
-            url:path,
+            url: path,
             method,
             ...datas
         }).then(res => {
@@ -18,3 +18,4 @@ const axios = function (path: string, method:Method= 'GET', data: object = {}) {
     })
 }
 export default axios;
+
