@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import LiNav from "./components/li-nav.vue";
-import {ref} from "vue";
+import {ref,watch} from "vue";
 
 import { Edit } from '@element-plus/icons'
+import {define_bookmarks_store} from "@/store";
 const changeSearchEngine = function (){
 
   console.log('change')
 }
 const input = ref<string>();
+watch(
+
+    input,
+    (new_val)=>{
+
+      bookmarks_store.set_search(new_val||'')
+    }
+)
+const bookmarks_store= define_bookmarks_store();
 </script>
 
 <template>
@@ -15,16 +25,9 @@ const input = ref<string>();
     <el-header>
 
 
-
       <el-row class="search" justify="center">
-<!--        <el-col :span="1" >-->
 
-
-<!--          <span>123</span>-->
-
-<!--        </el-col>-->
         <el-col :span="19" >
-
           <el-input v-model="input" placeholder="Please input" >
 
             <template #prefix>

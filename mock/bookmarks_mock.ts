@@ -14,7 +14,6 @@ const randomTag = function<T> (num:number,arr:Array<T>){
 }
 const bookmarks_mock = mock({
     'data|10': [{
-        'index|+1': 0,
         title: '@cname',
         url: Random.url(),
         'tags': ()=>randomTag<string>(3,['vue', 'java', 'movie']),

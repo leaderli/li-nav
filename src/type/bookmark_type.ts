@@ -1,7 +1,6 @@
 export interface bookmark_type {
-    index: number,
     title: string,
     url: string,
-    tags: Array<string>,
+    tags: string[],
     comment: string
 }

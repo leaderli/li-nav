@@ -47,11 +47,10 @@ import {bookmark_type} from "@/type/bookmark_type";
 import {PropType} from 'vue'
 
 
-const props = defineProps({
-  bookmark: {
-    type: Object as PropType<bookmark_type>
-  }
-})
+const props = defineProps<{
+  bookmark: bookmark_type
+}>()
+
 
 const open = function (bookmark: bookmark_type) {
   console.log(bookmark)

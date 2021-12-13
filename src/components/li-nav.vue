@@ -6,13 +6,12 @@ import {bookmarks_api} from '@/api/bookmarks_api';
 
 import LiNavCard from '@/components/li-nav-card.vue'
 import {ref} from "vue";
+import {define_bookmarks_store, bookmarks_store_type} from "@/store";
 
 const cardColNumber= 4;
-
-const shard_bookmarks = ref<Array<Array<bookmark_type>>>();
+const bookmarks_store= define_bookmarks_store();
 bookmarks_api().then(res=>{
-  console.log(res)
-  shard_bookmarks.value = Object.values(_(res).groupBy(bookmark=>Math.floor(bookmark.index/cardColNumber)).value())
+  bookmarks_store.set_bookmarks(res)
 })
 
 
@@ -23,7 +22,7 @@ bookmarks_api().then(res=>{
 <template>
   <div id="nav">
 
-    <el-row :gutter="20" v-for="bookmarks of shard_bookmarks" :key="bookmarks">
+    <el-row :gutter="20" v-for="bookmarks of bookmarks_store.shard_bookmarks" :key="bookmarks">
       <li-nav-card v-for=" bookmark of bookmarks " :bookmark="bookmark"></li-nav-card>
     </el-row>
 
