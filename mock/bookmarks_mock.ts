@@ -24,7 +24,7 @@ const bookmarks_mock = mock({
 export default [
 
     {
-        url: '/bookmarks',
+        url: '/api/bookmarks',
         method: 'get',
         response: () => {
             return bookmarks_mock.data
