@@ -1,40 +1,65 @@
 <script setup lang="ts">
 import LiNav from "./components/li-nav.vue";
-import {ref,watch} from "vue";
-
-import { Edit } from '@element-plus/icons'
+import {ref, watch} from "vue";
 import {define_bookmarks_store} from "@/store";
-const changeSearchEngine = function (){
+
+const changeSearchEngine = function () {
 
   console.log('change')
 }
 const input = ref<string>();
 watch(
-
     input,
-    (new_val)=>{
+    (new_val) => {
 
-      bookmarks_store.set_search(new_val||'')
+      bookmarks_store.set_search(new_val || '')
     }
 )
-const bookmarks_store= define_bookmarks_store();
+const bookmarks_store = define_bookmarks_store();
+
+
+const engine = ref('baidu')
+const options = [
+  {
+    value: 'baidu',
+    label: 'baidu'
+  },
+
+  {
+    value: 'google',
+    label: 'google'
+  }
+]
+
+
+const search = function (){
+
+  if(engine.value === 'baidu'){
+
+  window.open('https://www.baidu.com/s?word='+input.value)
+  }else {
+    window.open('https://www.google.com/search?q='+input.value)
+  }
+}
 </script>
 
 <template>
   <el-container>
     <el-header>
-
-
       <el-row class="search" justify="center">
-
-        <el-col :span="19" >
-          <el-input v-model="input" placeholder="Please input" >
-
-            <template #prefix>
-
-                <img src="@/assets/logo.png" alt="" class="icon" @click="changeSearchEngine"/>
-
-            </template>
+        <el-col :span="3">
+        <el-select v-model="engine" placeholder="Select" >
+          <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+          >
+          </el-option>
+        </el-select>
+        </el-col>
+        <el-col :span="16">
+          <el-input v-model="input"  autofocus @keyup.enter="search">
           </el-input>
         </el-col>
       </el-row>
@@ -65,13 +90,15 @@ body {
   }
 
   .search {
-    margin-top: 30px;
-    //width: 60%;
+    margin-top: 20px;
+    left: -5px;
+
   }
 }
+
 .icon {
   width: 20px;
   height: 20px;
-  margin:  auto;
+  margin: auto;
 }
 </style>
