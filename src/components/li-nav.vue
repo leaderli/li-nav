@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import {bookmark_type} from "@/type/bookmark_type";
-import {bookmarks_api,update_bookmarks_api} from '@/api/bookmarks_api';
+import {bookmarks_api} from '@/api/bookmarks_api';
 import LiNavCard from '@/components/li-nav-card.vue'
-import {computed, nextTick, ref} from "vue";
+import {computed, ref} from "vue";
 import {define_bookmarks_store} from "@/store";
-import _ from 'lodash';
 import axiosNew from "axios";
 import LiNavDialog from "@/components/li-nav-dialog.vue";
 
 const cardColNumber = 4;
 const bookmarks_store = define_bookmarks_store();
 
-const  fetch_bookmarks_api = function (){
+const fetch_bookmarks_api = function () {
   bookmarks_api().then(res => {
     bookmarks_store.set_bookmarks(res)
   })
@@ -20,17 +19,21 @@ const  fetch_bookmarks_api = function (){
 fetch_bookmarks_api()
 
 const currentBookmark = ref<bookmark_type | null>()
-const resetCurrentBookmark = function (bookmark:bookmark_type|null = null) {
-  currentBookmark.value =bookmark
+const resetCurrentBookmark = function (bookmark: bookmark_type | null = null) {
+  currentBookmark.value = bookmark
   fetch_bookmarks_api()
 }
 
-const displayDialog =function (bookmark:bookmark_type){
+const displayDialog = function (bookmark: bookmark_type) {
   currentBookmark.value = bookmark
 }
 const centerDialogVisible = computed(() => {
   return !!currentBookmark.value
 })
+
+
+
+
 
 </script>
 
@@ -38,13 +41,15 @@ const centerDialogVisible = computed(() => {
   <div id="nav">
 
     <el-row :gutter="20" v-for="bookmarks of bookmarks_store.shard_bookmarks" :key="bookmarks">
-      <li-nav-card v-for=" bookmark of bookmarks " :bookmark="bookmark"
+
+    <li-nav-card v-for=" bookmark of bookmarks " :bookmark="bookmark"
                    @contextmenu.prevent.native="displayDialog(bookmark)"></li-nav-card>
     </el-row>
 
   </div>
 
-  <li-nav-dialog  v-if="centerDialogVisible" :currentBookmark="currentBookmark" @resetCurrentBookmark="resetCurrentBookmark"></li-nav-dialog>
+  <li-nav-dialog v-if="centerDialogVisible" :currentBookmark="currentBookmark"
+                 @resetCurrentBookmark="resetCurrentBookmark"></li-nav-dialog>
 </template>
 
 <style scoped lang="scss">

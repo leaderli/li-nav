@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 import {createPinia, defineStore} from 'pinia';
-
+import  pinyin from  'pinyin'
 // 泛型接口
 import {bookmark_type} from '@/type/bookmark_type';
 
@@ -48,8 +48,13 @@ export const define_bookmarks_store = defineStore({
                             return !!_.find(Object.values(bookmark.tags), tag => tag.toLowerCase().includes(slot))
                         }
                     } else {
-                        append_predicate = (item: bookmark_type): boolean =>
-                            item.title.toLowerCase().includes(slot) || item.comment.toLowerCase().includes(slot)
+                        append_predicate = (item: bookmark_type): boolean =>{
+
+                        return      item.comment.toLowerCase().includes(slot)
+                            ||pinyin(item.comment,{
+                                style: pinyin.STYLE_NORMAL
+                            }).join('').includes(slot)
+                        }
                     }
 
                     bookmark_predicates.push(append_predicate)
@@ -82,7 +87,8 @@ export const define_bookmarks_store = defineStore({
     actions: {
 
         set_bookmarks(bookmarks: Array<bookmark_type>) {
-            this.bookmarks = bookmarks
+            //根据点击次数排序
+            this.bookmarks = bookmarks.sort((a,b)=>(b.count|0)-(a.count|0))
         },
 
         set_search(search: string) {

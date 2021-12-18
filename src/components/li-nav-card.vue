@@ -1,7 +1,10 @@
 <template>
+
   <el-col :span="6">
     <el-tooltip placement="top">
-      <template #content> {{ props.bookmark.url }}</template>
+      <template #content>    {{ props.bookmark.url }} <el-badge :value="props.bookmark.count" class="item">
+
+      </el-badge></template>
 
       <el-card class="box-card nav-card" shadow="hover" @click="open(props.bookmark)">
         <!--                  <edit class="demo-svg-icon"></edit>-->
@@ -17,6 +20,8 @@
               {{ tag }}
             </el-tag>
           </el-row>
+
+
           <el-row justify="start" >
             <el-col :span="24" class="comment">
 
@@ -36,6 +41,7 @@
 <script lang="ts" setup>
 import {bookmark_type} from "@/type/bookmark_type";
 import {PropType} from 'vue'
+import axiosNew from "axios";
 
 
 const props = defineProps<{
@@ -45,6 +51,12 @@ const props = defineProps<{
 
 const open = function (bookmark: bookmark_type) {
   window.open(bookmark.url, '_blank');
+  clickCount(bookmark)
+
+}
+const clickCount = function (bookmark: bookmark_type) {
+  bookmark.count = (bookmark.count|0)+1
+  axiosNew.put('/api/bookmarks/' + bookmark.id, bookmark)
 }
 
 </script>
@@ -67,4 +79,6 @@ const open = function (bookmark: bookmark_type) {
     text-align: left;
   }
 }
+
+
 </style>
