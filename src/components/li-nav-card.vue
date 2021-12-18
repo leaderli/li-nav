@@ -7,11 +7,15 @@
         <!--                  <edit class="demo-svg-icon"></edit>-->
         <div class="card-body">
           <el-row :gutter="10">
-            <el-col :span="4" v-for="tag of props.bookmark.tags">
-              <el-tag size="mini">
-                {{ tag }}
-              </el-tag>
-            </el-col>
+
+            <el-tag
+                v-for="tag in props.bookmark.tags"
+                :key="tag"
+                :disable-transitions="false"
+                size="mini"
+            >
+              {{ tag }}
+            </el-tag>
           </el-row>
           <el-row justify="start" >
             <el-col :span="24" class="comment">
@@ -40,7 +44,6 @@ const props = defineProps<{
 
 
 const open = function (bookmark: bookmark_type) {
-  console.log(bookmark)
   window.open(bookmark.url, '_blank');
 }
 

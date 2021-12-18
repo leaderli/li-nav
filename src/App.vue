@@ -3,10 +3,7 @@ import LiNav from "./components/li-nav.vue";
 import {ref, watch} from "vue";
 import {define_bookmarks_store} from "@/store";
 
-const changeSearchEngine = function () {
 
-  console.log('change')
-}
 const input = ref<string>();
 watch(
     input,
@@ -59,7 +56,7 @@ const search = function (){
         </el-select>
         </el-col>
         <el-col :span="16">
-          <el-input v-model="input"  autofocus @keyup.enter="search">
+          <el-input v-model="input"  autofocus @keyup.enter="search"  clearable>
           </el-input>
         </el-col>
       </el-row>

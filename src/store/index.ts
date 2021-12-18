@@ -39,13 +39,11 @@ export const define_bookmarks_store = defineStore({
 
 
                 for (let slot of (search || '').split(/\s/)) {
-                    console.log('slot',slot)
                     let append_predicate;
                     if (slot.startsWith('#') && slot.length > 1) {
 
                         slot = slot.substring(1)
                         append_predicate = (): boolean => {
-                            console.log(Object.values(bookmark.tags),'------>',slot)
                             return !!_.find(Object.values(bookmark.tags), tag => tag.includes(slot))
                         }
                     } else {
@@ -57,7 +55,6 @@ export const define_bookmarks_store = defineStore({
                 }
 
 
-                console.log(bookmark_predicates)
                 return _.find(bookmark_predicates,bookmark_predicate=>bookmark_predicate(bookmark))
             })
 
@@ -85,11 +82,9 @@ export const define_bookmarks_store = defineStore({
 
         set_bookmarks(bookmarks: Array<bookmark_type>) {
             this.bookmarks = bookmarks
-            console.log(this.bookmarks)
         },
 
         set_search(search: string) {
-            console.log('set search ', search)
             this.search = search?.trim() || '';
         }
     }
