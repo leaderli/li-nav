@@ -40,15 +40,16 @@ export const define_bookmarks_store = defineStore({
 
                 for (let slot of (search || '').split(/\s/)) {
                     let append_predicate;
+                    slot = slot.toLowerCase();
                     if (slot.startsWith('#') && slot.length > 1) {
 
                         slot = slot.substring(1)
                         append_predicate = (): boolean => {
-                            return !!_.find(Object.values(bookmark.tags), tag => tag.includes(slot))
+                            return !!_.find(Object.values(bookmark.tags), tag => tag.toLowerCase().includes(slot))
                         }
                     } else {
                         append_predicate = (item: bookmark_type): boolean =>
-                            item.title.includes(slot) || item.comment.includes(slot)
+                            item.title.toLowerCase().includes(slot) || item.comment.toLowerCase().includes(slot)
                     }
 
                     bookmark_predicates.push(append_predicate)
