@@ -35,7 +35,7 @@ export const define_bookmarks_store = defineStore({
             return state.bookmarks.filter(bookmark => {
 
                 const search = state.search;
-                let bookmark_predicates:Array<bookmark_predicate> = [(item: bookmark_type): boolean => !search?.trim() || search === '#']
+                let bookmark_predicates:Array<bookmark_predicate> = [(): boolean => !search?.trim() || search === '#']
 
 
                 for (let slot of (search || '').split(/\s/)) {
@@ -44,7 +44,7 @@ export const define_bookmarks_store = defineStore({
                     if (slot.startsWith('#') && slot.length > 1) {
 
                         slot = slot.substring(1)
-                        append_predicate = (item: bookmark_type): boolean => {
+                        append_predicate = (): boolean => {
                             console.log(Object.values(bookmark.tags),'------>',slot)
                             return !!_.find(Object.values(bookmark.tags), tag => tag.includes(slot))
                         }
@@ -66,7 +66,6 @@ export const define_bookmarks_store = defineStore({
 
             let result: Array<Array<bookmark_type>> = []
             let items: Array<bookmark_type> = []
-            let i = 0;
             for (let bookmark of this.filter_bookmarks) {
 
                 if (items.length < state.col) {

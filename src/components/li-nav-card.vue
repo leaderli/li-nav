@@ -1,9 +1,9 @@
 <template>
   <el-col :span="6">
     <el-tooltip placement="top">
-      <template #content> {{ this.props.bookmark.url }}</template>
+      <template #content> {{ props.bookmark.url }}</template>
 
-      <el-card class="box-card nav-card" shadow="hover" @click="open(this.props.bookmark)">
+      <el-card class="box-card nav-card" shadow="hover" @click="open(props.bookmark)">
         <!--                  <edit class="demo-svg-icon"></edit>-->
         <div class="card-body">
           <el-row :gutter="10">
