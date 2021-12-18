@@ -8,3 +8,5 @@ src/**/*.js
 src/**/*.js.map
 mock/**/*.js
 mock/**/*.js.map
+nohup.out
+json_server.pid
