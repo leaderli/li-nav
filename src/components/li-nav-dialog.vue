@@ -7,7 +7,7 @@ import _ from "lodash";
 
 const props = defineProps({
   currentBookmark: {
-    type: Object as PropType<bookmark_type>,
+    type: Object as PropType<bookmark_type>|any
   }
 })
 const emit = defineEmits(['resetCurrentBookmark'])
