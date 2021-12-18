@@ -1,7 +1,6 @@
 {
-  "meta":{
-
-    "version":1
+  "meta": {
+    "version": 1
   },
   "bookmarks": [
     {
@@ -9,7 +8,8 @@
       "comment": "gef-tutorials",
       "url": "https://vainolo.com/tutorials/gef-tutorials/",
       "tags": [
-        "eclipse"
+        "eclipse",
+        "tutorials"
       ],
       "id": 0
     },
@@ -24,7 +24,7 @@
     },
     {
       "title": "",
-      "comment": "Java Development Tools (JDT)",
+      "comment": "Java Development Tools (JDT) ",
       "url": "https://www.programcreek.com/category/eclipse-2/eclipse-astparser/",
       "tags": [
         "eclipse"
@@ -72,7 +72,8 @@
       "comment": "makefile介绍 — 跟我一起写Makefile 1.0 文档",
       "url": "https://seisman.github.io/how-to-write-makefile/introduction.html",
       "tags": [
-        "linux"
+        "linux",
+        "c"
       ],
       "id": 7
     },
@@ -769,20 +770,6 @@
     },
     {
       "title": "",
-      "comment": "工具软件",
-      "url": "https://www.fosshub.com/categories.html",
-      "tags": [],
-      "id": 99
-    },
-    {
-      "title": "",
-      "comment": "regex",
-      "url": "https://regex101.com/",
-      "tags": [],
-      "id": 100
-    },
-    {
-      "title": "",
       "comment": "欧路词典",
       "url": "https://dict.eudic.net/",
       "tags": [],
@@ -801,13 +788,6 @@
       "url": "https://www.regex101.com/",
       "tags": [],
       "id": 103
-    },
-    {
-      "title": "",
-      "comment": "表情锅",
-      "url": "https://sorry.xuty.tk/wangjingze/",
-      "tags": [],
-      "id": 104
     },
     {
       "title": "",
@@ -857,6 +837,16 @@
       "url": "https://www.visioncortex.org/vtracer/",
       "tags": [],
       "id": 111
+    },
+    {
+      "id": 112,
+      "title": "",
+      "comment": "element-plus",
+      "url": "https://element-plus.gitee.io/zh-CN/component/button.html",
+      "tags": [
+        "ui",
+        "vue"
+      ]
     }
   ]
 }
