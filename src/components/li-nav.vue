@@ -1,19 +1,36 @@
 <script setup lang="ts">
-import _ from 'lodash'
 import {bookmark_type} from "@/type/bookmark_type";
-
 import {bookmarks_api} from '@/api/bookmarks_api';
-
 import LiNavCard from '@/components/li-nav-card.vue'
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import {define_bookmarks_store} from "@/store";
+import axiosNew from "axios";
+import LiNavDialog from "@/components/li-nav-dialog.vue";
 
-const cardColNumber= 4;
+const cardColNumber = 4;
+const bookmarks_store = define_bookmarks_store();
 
-const shard_bookmarks = ref<Array<Array<bookmark_type>>>();
-bookmarks_api().then(res=>{
-  console.log(res)
-  shard_bookmarks.value = Object.values(_(res).groupBy(bookmark=>Math.floor(bookmark.index/cardColNumber)).value())
+const fetch_bookmarks_api = function () {
+  bookmarks_api().then(res => {
+    bookmarks_store.set_bookmarks(res)
+  })
+}
+
+fetch_bookmarks_api()
+
+const currentBookmark = ref<bookmark_type | null>()
+const resetCurrentBookmark = function (bookmark: bookmark_type | null = null) {
+  currentBookmark.value = bookmark
+  fetch_bookmarks_api()
+}
+
+const displayDialog = function (bookmark: bookmark_type) {
+  currentBookmark.value = bookmark
+}
+const centerDialogVisible = computed(() => {
+  return !!currentBookmark.value
 })
+
 
 
 
@@ -23,11 +40,16 @@ bookmarks_api().then(res=>{
 <template>
   <div id="nav">
 
-    <el-row :gutter="20" v-for="bookmarks of shard_bookmarks" :key="bookmarks">
-      <li-nav-card v-for=" bookmark of bookmarks " :bookmark="bookmark"></li-nav-card>
+    <el-row :gutter="20" v-for="bookmarks of bookmarks_store.shard_bookmarks" :key="bookmarks">
+
+    <li-nav-card v-for=" bookmark of bookmarks " :bookmark="bookmark"
+                   @contextmenu.prevent.native="displayDialog(bookmark)"></li-nav-card>
     </el-row>
 
   </div>
+
+  <li-nav-dialog v-if="centerDialogVisible" :currentBookmark="currentBookmark"
+                 @resetCurrentBookmark="resetCurrentBookmark"></li-nav-dialog>
 </template>
 
 <style scoped lang="scss">

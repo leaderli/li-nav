@@ -1,7 +1,8 @@
 export interface bookmark_type {
-    index: number,
+    id:number
     title: string,
     url: string,
-    tags: Array<string>,
-    comment: string
+    tags: string[],
+    comment: string,
+    count:number
 }

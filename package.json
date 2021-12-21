@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit  && vite build",
+    "build1": "vue-tsc --noEmit  ",
+    "build0":  "vite build",
     "serve": "vite preview",
     "test": "jest"
   },
@@ -14,6 +16,7 @@
     "element-plus": "^1.2.0-beta.5",
     "lodash": "^4.17.21",
     "pinia": "^2.0.6",
+    "pinyin": "^2.10.2",
     "vue": "^3.2.16"
   },
   "devDependencies": {
@@ -22,6 +25,7 @@
     "@pinia/testing": "0.0.8",
     "@types/jest": "^27.0.3",
     "@types/lodash": "^4.14.177",
+    "@types/pinyin": "^2.10.0",
     "@vitejs/plugin-vue": "^1.9.3",
     "@vue/test-utils": "^2.0.0-rc.17",
     "babel-jest": "^27.4.4",
