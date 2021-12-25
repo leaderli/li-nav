@@ -40,24 +40,17 @@ const search = function (){
 }
 
 const input_ref = ref<HTMLElement>()
-const  global_key_input  = (e:KeyboardEvent)=>{
- if(!! (e.key.match(/^[a-z0-9]$/))){
-   input.value = e.key
-   input_ref.value?.focus()
- }else if(e.key === 'Backspace'){
-   input.value = ''
-   input_ref.value?.focus()
- }
-}
 
 
-
-const  focusin = function (){
-  window.removeEventListener('keyup',global_key_input)
-}
 
 const  focusout = function (){
-  window.addEventListener('keyup',global_key_input)
+  window.addEventListener('keyup',function (e:KeyboardEvent){
+
+    if(e.altKey&& e.key === 'Backspace'){
+      input_ref.value?.focus()
+
+    }
+  })
 }
 
 </script>

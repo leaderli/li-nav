@@ -1,17 +1,9 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from "path";
-import { viteMockServe } from "vite-plugin-mock";
 export default defineConfig(({ command }) => {
     return {
-        plugins: [vue(),
-            viteMockServe({
-                // default
-                mockPath: 'mock',
-                logger: false,
-                localEnabled: command === 'serve'
-            }),
-        ],
+        plugins: [vue()],
         server: {
             //访问地址配置
             host: "0.0.0.0",
@@ -24,7 +16,7 @@ export default defineConfig(({ command }) => {
             //代理配置，
             proxy: {
                 "/api": {
-                    target: "",
+                    target: "http://centos7:10004",
                     changeOrigin: true,
                     rewrite: (path) => path.replace(/^\/api/, ""),
                 },

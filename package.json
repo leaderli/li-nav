@@ -4,8 +4,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit  && vite build",
-    "build1": "vue-tsc --noEmit  ",
-    "build0":  "vite build",
     "serve": "vite preview",
     "test": "jest"
   },
