@@ -38,6 +38,28 @@ const search = function (){
     window.open('https://www.google.com/search?q='+input.value)
   }
 }
+
+const input_ref = ref<HTMLElement>()
+const  global_key_input  = (e:KeyboardEvent)=>{
+ if(!! (e.key.match(/^[a-z0-9]$/))){
+   input.value = e.key
+   input_ref.value?.focus()
+ }else if(e.key === 'Backspace'){
+   input.value = ''
+   input_ref.value?.focus()
+ }
+}
+
+
+
+const  focusin = function (){
+  window.removeEventListener('keyup',global_key_input)
+}
+
+const  focusout = function (){
+  window.addEventListener('keyup',global_key_input)
+}
+
 </script>
 
 <template>
@@ -56,7 +78,7 @@ const search = function (){
         </el-select>
         </el-col>
         <el-col :span="16">
-          <el-input v-model="input"  autofocus @keyup.enter="search"  clearable>
+          <el-input v-model="input"  autofocus @keyup.enter="search" @focusin="focusin" @focusout="focusout" ref="input_ref" clearable>
           </el-input>
         </el-col>
       </el-row>

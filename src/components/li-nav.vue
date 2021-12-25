@@ -31,7 +31,12 @@ const centerDialogVisible = computed(() => {
   return !!currentBookmark.value
 })
 
+const input_alt_key_input = function (e:KeyboardEvent){
+  if(e.altKey && !!e.key.match(/^[0-9]$/)){
 
+    console.log(e.key)
+  }
+}
 
 
 
