@@ -85,7 +85,7 @@ const showTagInput = async function () {
 
 </script>
 <template>
-  <el-dialog v-model="centerDialogVisible" title="Warning" fullscreen :show-close="false">
+  <el-dialog v-model="centerDialogVisible" fullscreen :show-close="false">
 
     <el-row>
 
