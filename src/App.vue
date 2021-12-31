@@ -3,7 +3,6 @@ import LiNav from "./components/li-nav.vue";
 import {ref, watch} from "vue";
 import {define_bookmarks_store} from "@/store";
 
-
 const input = ref<string>();
 watch(
     input,
