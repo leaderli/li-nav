@@ -71,7 +71,7 @@ const  focusout = function (){
         </el-select>
         </el-col>
         <el-col :span="16">
-          <el-input v-model="input"  autofocus @keyup.enter="search" @focusin="focusin" @focusout="focusout" ref="input_ref" clearable>
+          <el-input v-model="input"  autofocus @keyup.enter="search"  @focusout="focusout" ref="input_ref" clearable>
           </el-input>
         </el-col>
       </el-row>

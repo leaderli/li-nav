@@ -1,9 +1,12 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import path from "path";
-export default defineConfig(({ command }) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var vite_1 = require("vite");
+var plugin_vue_1 = require("@vitejs/plugin-vue");
+var path_1 = require("path");
+exports.default = (0, vite_1.defineConfig)(function (_a) {
+    var command = _a.command;
     return {
-        plugins: [vue()],
+        plugins: [(0, plugin_vue_1.default)()],
         server: {
             //访问地址配置
             host: "0.0.0.0",
@@ -18,7 +21,7 @@ export default defineConfig(({ command }) => {
                 "/api": {
                     target: "http://centos7:10004",
                     changeOrigin: true,
-                    rewrite: (path) => path.replace(/^\/api/, ""),
+                    rewrite: function (path) { return path.replace(/^\/api/, ""); },
                 },
             },
             hmr: {
@@ -30,9 +33,8 @@ export default defineConfig(({ command }) => {
         resolve: {
             //设置项目文件路径的别名
             alias: {
-                "@": path.resolve(__dirname, "./src"),
+                "@": path_1.default.resolve(__dirname, "./src"),
             },
         },
     };
 });
-//# sourceMappingURL=vite.config.js.map
